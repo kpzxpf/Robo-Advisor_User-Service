@@ -23,6 +23,6 @@ public class Role {
     @Column(name = "role_name", unique = true, nullable = false)
     private String roleName;
 
-    @ManyToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "role")
     private Set<User> users = new HashSet<>();
 }
