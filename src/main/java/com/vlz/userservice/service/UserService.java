@@ -14,12 +14,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User createUser(UserDto userDto) {
-        User user = convertUserDtoToUser(userDto);
-
-        return userRepository.save(user);
-    }
-
     public User updateUser(UserDto userDto) {
         User user = getUserById(userDto.getId());
 
@@ -37,15 +31,5 @@ public class UserService {
                     log.error("UserService getUserById(): User with id {} not found", id);
                     return new EntityNotFoundException("User with id " + id + " not found");
                 });
-    }
-
-    private User convertUserDtoToUser(UserDto userDto) {
-        return User.builder()
-                .id(userDto.getId())
-                .email(userDto.getEmail())
-                .firstName(userDto.getFirstName())
-                .lastName(userDto.getLastName())
-                .username(userDto.getUsername())
-                .build();
     }
 }
