@@ -1,3 +1,10 @@
+CREATE TABLE roles
+(
+    id        SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) UNIQUE NOT NULL
+);
+
+
 CREATE TABLE users
 (
     id            SERIAL PRIMARY KEY,
@@ -10,20 +17,6 @@ CREATE TABLE users
     address       TEXT,
     phone_number  VARCHAR(20),
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE roles
-(
-    id        SERIAL PRIMARY KEY,
-    role_name VARCHAR(50) UNIQUE NOT NULL
-);
-
-CREATE TABLE user_roles
-(
-    user_id INTEGER NOT NULL,
-    role_id INTEGER NOT NULL,
-    PRIMARY KEY (user_id, role_id),
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (role_id) REFERENCES roles (id)
+    updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    role_id       INTEGER REFERENCES roles (id)
 );
