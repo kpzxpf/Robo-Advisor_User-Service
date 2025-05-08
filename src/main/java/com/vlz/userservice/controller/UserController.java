@@ -14,12 +14,6 @@ public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
 
-    @PostMapping
-    public UserDto createUser(@RequestBody @Valid UserDto userDto) {
-        return userMapper.toDto(
-                userService.createUser(userDto));
-    }
-
     @PutMapping
     public UserDto updateUser(@RequestBody @Valid UserDto userDto) {
         return userMapper.toDto(
