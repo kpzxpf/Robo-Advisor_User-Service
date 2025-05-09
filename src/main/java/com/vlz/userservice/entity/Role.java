@@ -10,12 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
 @Table(name = "roles")
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +24,7 @@ public class Role {
     @Column(name = "role_name", unique = true, nullable = false)
     private String roleName;
 
-    @OneToMany(mappedBy = "role")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    @Builder.Default
     private Set<User> users = new HashSet<>();
 }
