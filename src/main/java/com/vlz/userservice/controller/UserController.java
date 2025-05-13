@@ -25,5 +25,4 @@ public class UserController {
         return userMapper.toDto(
                 userService.getUserById(id));
     }
-
 }
