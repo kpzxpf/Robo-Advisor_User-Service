@@ -1,7 +1,9 @@
 package com.vlz.userservice.service;
 
 import com.vlz.userservice.dto.UserDto;
+import com.vlz.userservice.dto.event.UserAddEvent;
 import com.vlz.userservice.entity.User;
+import com.vlz.userservice.mapper.UserMapper;
 import com.vlz.userservice.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
+
+    public User save(UserAddEvent userAddEvent) {
+        return userRepository.save(userMapper.userAddEventToUser(userAddEvent));
+    }
 
     public User updateUser(UserDto userDto) {
         User user = getUserById(userDto.getId());
@@ -31,5 +38,9 @@ public class UserService {
                     log.error("UserService getUserById(): User with id {} not found", id);
                     return new EntityNotFoundException("User with id " + id + " not found");
                 });
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

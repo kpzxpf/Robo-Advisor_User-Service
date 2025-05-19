@@ -1,6 +1,7 @@
 package com.vlz.userservice.mapper;
 
 import com.vlz.userservice.dto.UserDto;
+import com.vlz.userservice.dto.event.UserAddEvent;
 import com.vlz.userservice.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -13,4 +14,6 @@ public interface UserMapper {
     UserDto toDto(User user);
 
     List<UserDto> toDto(List<User> users);
+
+    User userAddEventToUser(UserAddEvent event);
 }
